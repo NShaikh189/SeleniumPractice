@@ -1,6 +1,5 @@
 package org.example;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 import org.junit.jupiter.api.Test;
@@ -21,8 +20,9 @@ public class AppTest {
     public void shouldAnswerWithTrue() throws InterruptedException {
 
         ChromeOptions co = new ChromeOptions();
-
-        WebDriver driver = new ChromeDriver();
+        co.addArguments("--headless");
+        co.addArguments("--incognito");
+        WebDriver driver = new ChromeDriver(co);
         driver.get("https://www.google.com");
 //        driver.switchTo().newWindow(WindowType.WINDOW);
 //        driver.get("https://youtube.com");
