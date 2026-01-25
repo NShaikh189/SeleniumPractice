@@ -24,8 +24,8 @@ public class AppTest {
         co.addArguments("--incognito");
         WebDriver driver = new ChromeDriver(co);
         driver.get("https://www.google.com");
-//        driver.switchTo().newWindow(WindowType.WINDOW);
-//        driver.get("https://youtube.com");
+      driver.switchTo().newWindow(WindowType.WINDOW);
+        driver.get("https://youtube.com");
 //        driver.switchTo().newWindow(WindowType.TAB);
 //        driver.get("https://cricbuzz.com");
             Thread.sleep(5000);
