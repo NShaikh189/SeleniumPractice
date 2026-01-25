@@ -24,14 +24,16 @@ public class AppTest {
 
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.google.com");
-        driver.switchTo().newWindow(WindowType.WINDOW);
-        driver.get("https://youtube.com");
-        driver.switchTo().newWindow(WindowType.TAB);
-        driver.get("https://cricbuzz.com");
-        Thread.sleep(5000);
+//        driver.switchTo().newWindow(WindowType.WINDOW);
+//        driver.get("https://youtube.com");
+//        driver.switchTo().newWindow(WindowType.TAB);
+//        driver.get("https://cricbuzz.com");
+            Thread.sleep(5000);
 
-        driver.close();
-       // driver.quit();
+     //   driver.close();
+    //    driver.getTitle(); //No such session exception: Invalid Session ID
+        driver.quit();
+    //    driver.getTitle(); //No such session exception: Session ID is null
         System.out.println("Finished");
         }
 }
