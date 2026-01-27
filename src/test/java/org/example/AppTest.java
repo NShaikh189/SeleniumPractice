@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WindowType;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.utils.BrowserUtil;
 
 /**
  * Unit test for simple App.
@@ -22,7 +23,10 @@ public class AppTest {
         ChromeOptions co = new ChromeOptions();
         co.addArguments("--headless");
         co.addArguments("--incognito");
-        WebDriver driver = new ChromeDriver(co);
+
+        BrowserUtil bu = new BrowserUtil();
+
+        WebDriver driver = bu.launchBrowser("CHROME");
         driver.get("https://www.google.com");
       driver.switchTo().newWindow(WindowType.WINDOW);
         driver.get("https://youtube.com");
