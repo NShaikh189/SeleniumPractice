@@ -29,4 +29,19 @@ public class BrowserUtil {
 
         return driver;
     }
+
+    public void launchUrl(String url)
+    {
+        driver.navigate().to(url);
+    }
+
+    public void closeBrowser()
+    {
+        driver.close();
+    }
+
+    public void quitBrowser()
+    {
+        driver.quit();
+    }
 }

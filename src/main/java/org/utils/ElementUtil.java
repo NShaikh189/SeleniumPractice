@@ -22,4 +22,9 @@ public class ElementUtil {
     {
         getElement(locator).sendKeys(value);
     }
+
+    public void clickButton(By locator)
+    {
+        getElement(locator).click();
+    }
 }
