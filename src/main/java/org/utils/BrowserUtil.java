@@ -44,4 +44,15 @@ public class BrowserUtil {
     {
         driver.quit();
     }
+
+    public String getPageTitle()
+    {
+        return driver.getTitle();
+    }
+
+
+    public String getUrl()
+    {
+        return driver.getCurrentUrl();
+    }
 }
