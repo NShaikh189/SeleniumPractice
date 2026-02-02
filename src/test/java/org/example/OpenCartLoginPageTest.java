@@ -1,11 +1,9 @@
 package org.example;
 
-import org.OpenCartLoginPage;
+import org.pages.OpenCartLoginPage;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.utils.BrowserUtil;
-import org.utils.ElementUtil;
 
 public class OpenCartLoginPageTest {
 
