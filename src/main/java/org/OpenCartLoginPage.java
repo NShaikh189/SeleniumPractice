@@ -7,7 +7,7 @@ import org.utils.ElementUtil;
 public class OpenCartLoginPage {
     private WebDriver driver;
     private ElementUtil eu;
-    private By emailId = By.id("input-email");
+    private final By EMAILID = By.id("input-email");
     private By password = By.id("input-password");
     private By submitBtn = By.xpath("//input[@value='Login']");
 
@@ -19,7 +19,7 @@ public class OpenCartLoginPage {
 
     public void doLogin(String eid, String pwd)
     {
-        eu.doSendKeys(emailId,eid);
+        eu.doSendKeys(EMAILID,eid);
         eu.doSendKeys(password,pwd);
         eu.clickButton(submitBtn);
     }
