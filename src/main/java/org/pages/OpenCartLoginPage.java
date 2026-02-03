@@ -25,6 +25,6 @@ public class OpenCartLoginPage {
 //        eu.doSendKeys(password,pwd);
         eu.doSendKeys("id",eid,emailId);
         eu.doSendKeys("id",pwd,pswd);
-        eu.clickButton(submitBtn);
+        eu.doClick(submitBtn);
     }
 }

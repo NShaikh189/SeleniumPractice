@@ -28,6 +28,20 @@ public class ElementUtil {
             case "classname": locator = By.className(locatorValue);
             break;
 
+            case "xpath": locator = By.xpath(locatorValue);
+            break;
+
+            case "cssselector": locator = By.cssSelector(locatorValue);
+                break;
+
+            case "linktext" : locator = By.linkText(locatorValue);
+            break;
+
+            case "partiallinktext": locator = By.partialLinkText(locatorValue);
+            break;
+
+            case "tagname": locator = By.tagName(locatorValue);
+            break;
             default: break;
          }
     return locator;
@@ -50,11 +64,22 @@ public class ElementUtil {
     }
     public void doSendKeys(By locator, String value)
     {
+        getElement(locator).clear();
         getElement(locator).sendKeys(value);
     }
 
-    public void clickButton(By locator)
+    public void doClick(String locatorType, String locatorValue)
+    {
+        getElement(locatorType, locatorValue).click();
+    }
+
+    public void doClick(By locator)
     {
         getElement(locator).click();
+    }
+
+    public String doGetElementText(By locator)
+    {
+       return getElement(locator).getText();
     }
 }
