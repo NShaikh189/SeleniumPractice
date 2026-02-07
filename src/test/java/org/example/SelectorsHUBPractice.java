@@ -7,6 +7,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.utils.BrowserUtil;
+import org.utils.ElementUtil;
 
 import java.time.Duration;
 
@@ -14,8 +16,11 @@ public class SelectorsHUBPractice {
     static WebDriver driver;
 
     public static void main(String[] args) throws InterruptedException{
-        driver = new ChromeDriver();
-        driver.navigate().to("https://selectorshub.com/xpath-practice-page/");
+        BrowserUtil browserUtil = new BrowserUtil();
+        ElementUtil elementUtil = new ElementUtil(driver);
+
+        driver = browserUtil.launchBrowser("chrome");
+        browserUtil.launchUrl("https://selectorshub.com/xpath-practice-page/");
 
         By userEmail = By.name("email");
         By password = By.id("pass");
@@ -25,11 +30,11 @@ public class SelectorsHUBPractice {
         By submit = By.xpath("//button[@value = 'Submit']");
                 //By.xpath("//button[text()='Submit']");
 
-        driver.findElement(userEmail).sendKeys("abc@gmail.com");
-        driver.findElement(password).sendKeys("#1243@Test");
-        driver.findElement(company).sendKeys("CTS");
-        driver.findElement(mobileNumber).sendKeys("342423423");
-        driver.findElement(country).sendKeys("India");
+        elementUtil.doSendKeys(userEmail,"abc@gmail.com");
+        elementUtil.doSendKeys(password,"#1243@Test");
+        elementUtil.doSendKeys(company,"CTS");
+        elementUtil.doSendKeys(mobileNumber,"342423423");
+        elementUtil.doSendKeys(country,"India");
 
         WebElement submitButton = driver.findElement(submit);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
