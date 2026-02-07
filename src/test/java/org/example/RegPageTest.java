@@ -14,8 +14,8 @@ public class RegPageTest {
 
         driver = bu.launchBrowser("chrome");
         bu.launchUrl("https://naveenautomationlabs.com/opencart/index.php?route=account/register");
-
-        By fname
-                By lname
+//
+//        By fname
+//                By lname
     }
 }
