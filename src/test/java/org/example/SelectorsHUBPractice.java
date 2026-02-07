@@ -17,10 +17,11 @@ public class SelectorsHUBPractice {
 
     public static void main(String[] args) throws InterruptedException{
         BrowserUtil browserUtil = new BrowserUtil();
-        ElementUtil elementUtil = new ElementUtil(driver);
 
         driver = browserUtil.launchBrowser("chrome");
         browserUtil.launchUrl("https://selectorshub.com/xpath-practice-page/");
+
+        ElementUtil elementUtil = new ElementUtil(driver);
 
         By userEmail = By.name("email");
         By password = By.id("pass");
@@ -28,7 +29,7 @@ public class SelectorsHUBPractice {
         By mobileNumber = By.name("mobile number");
         By country = By.xpath("//label[text()='Country']/input");
         By submit = By.xpath("//button[@value = 'Submit']");
-                //By.xpath("//button[text()='Submit']");
+
 
         elementUtil.doSendKeys(userEmail,"abc@gmail.com");
         elementUtil.doSendKeys(password,"#1243@Test");
