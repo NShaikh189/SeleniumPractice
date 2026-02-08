@@ -19,14 +19,11 @@ public class SelectorsHUBPractice {
         BrowserUtil browserUtil = new BrowserUtil();
 
         driver = browserUtil.launchBrowser("chrome");
+        ElementUtil elementUtil = new ElementUtil(driver);
+
         browserUtil.launchUrl("https://selectorshub.com/xpath-practice-page/");
 
-        String flag = isPageLoaded(3);
-        boolean f = Boolean.parseBoolean(flag);
-
-        System.out.println(flag);
-        ElementUtil elementUtil = new ElementUtil(driver);
-        if(f) {
+        if(elementUtil.isPageLoaded(3)) {
             By userEmail = By.name("email");
             By password = By.id("pass");
             By company = By.name("company");
@@ -53,11 +50,7 @@ public class SelectorsHUBPractice {
 
         driver.quit();
     }
-    private static String isPageLoaded(int i) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(i));
 
-        return wait.until(ExpectedConditions.jsReturnsValue("return document.readyState==='complete'")).toString();
-    }
 }
 
 
