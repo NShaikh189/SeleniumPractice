@@ -21,29 +21,44 @@ public class SelectorsHUBPractice {
         driver = browserUtil.launchBrowser("chrome");
         browserUtil.launchUrl("https://selectorshub.com/xpath-practice-page/");
 
+        String flag = isPageLoaded(3);
+        boolean f = Boolean.parseBoolean(flag);
+
+        System.out.println(flag);
         ElementUtil elementUtil = new ElementUtil(driver);
+        if(f) {
+            By userEmail = By.name("email");
+            By password = By.id("pass");
+            By company = By.name("company");
+            By mobileNumber = By.name("mobile number");
+            By country = By.xpath("//label[text()='Country']/input");
+            //  By submit = By.xpath("//button[@value = 'Submit']");
 
-        By userEmail = By.name("email");
-        By password = By.id("pass");
-        By company = By.name("company");
-        By mobileNumber = By.name("mobile number");
-        By country = By.xpath("//label[text()='Country']/input");
-        By submit = By.xpath("//button[@value = 'Submit']");
 
+            elementUtil.doSendKeys(userEmail, "abc@gmail.com");
+            elementUtil.doSendKeys(password, "#1243@Test");
+            elementUtil.doSendKeys(company, "CTS");
+            elementUtil.doSendKeys(mobileNumber, "342423423");
+            elementUtil.doSendKeys(country, "India");
 
-        elementUtil.doSendKeys(userEmail,"abc@gmail.com");
-        elementUtil.doSendKeys(password,"#1243@Test");
-        elementUtil.doSendKeys(company,"CTS");
-        elementUtil.doSendKeys(mobileNumber,"342423423");
-        elementUtil.doSendKeys(country,"India");
-
-        WebElement submitButton = driver.findElement(submit);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
-        wait.until(ExpectedConditions.elementToBeClickable(submit))
-        .click();
-
-        Thread.sleep(3000);
+//        WebElement submitButton = driver.findElement(submit);
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+//        wait.until(ExpectedConditions.elementToBeClickable(submit))
+//        .click();
+        }
+        else {
+            System.out.println("Page not loaded");
+        }
+            Thread.sleep(3000);
 
         driver.quit();
     }
+    private static String isPageLoaded(int i) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(i));
+
+        return wait.until(ExpectedConditions.jsReturnsValue("return document.readyState==='complete'")).toString();
+    }
 }
+
+
+

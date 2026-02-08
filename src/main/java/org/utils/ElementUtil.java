@@ -64,7 +64,10 @@ public class ElementUtil {
     }
     public void doSendKeys(By locator, String value)
     {
-        getElement(locator).clear();
+        //getElement(locator).clear();
+        if(getElement(locator).getText().length()!=0)
+            getElement(locator).clear();
+        else
         getElement(locator).sendKeys(value);
     }
 
