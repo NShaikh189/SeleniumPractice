@@ -1,6 +1,7 @@
 package org.example;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -33,7 +34,7 @@ public class SelectorsHUBPractice {
             //  By submit = By.xpath("//button[@value = 'Submit']");
             By firstCrush = By.cssSelector("#inp_val");
             //By downloadLink = By.linkText("Download Link");
-            By downloadLink = By.xpath("//*[@id='content']/div[2]/div/div[2]/div/div[1]/div[2]/div/div/span/a");
+          //  By downloadLink = By.xpath("//*[@id='content']/div[2]/div/div[2]/div/div[1]/div[2]/div/div/span/a");
 
             elementUtil.doSendKeys(userEmail, "abc@gmail.com");
             elementUtil.doSendKeys(password, "#1243@Test");
@@ -42,15 +43,33 @@ public class SelectorsHUBPractice {
             elementUtil.doSendKeys(country, "India");
             elementUtil.doSendKeys(firstCrush,"Hoor");
             //elementUtil.doClick(downloadLink);
-            String text = driver.findElement(downloadLink).getText();
-            System.out.println(text);
-            Actions act = new Actions(driver);
-            act.scrollToElement(driver.findElement(downloadLink)).click().build().perform();
-            System.out.println(browserUtil.getPageTitle());
+//            String text = driver.findElement(downloadLink).getText();
+//            System.out.println(text);
+//            Actions act = new Actions(driver);
+//            act.scrollToElement(driver.findElement(downloadLink)).click().build().perform();
+//            System.out.println(browserUtil.getPageTitle());
 //        WebElement submitButton = driver.findElement(submit);
 //        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
 //        wait.until(ExpectedConditions.elementToBeClickable(submit))
 //        .click();
+
+            By downloadLink = By.partialLinkText("DownLoad");
+
+            WebElement link = driver.findElement(downloadLink);
+
+            String parent = driver.getWindowHandle();
+
+            ((JavascriptExecutor) driver)
+                    .executeScript("arguments[0].scrollIntoView(true); arguments[0].click();", link);
+
+            for (String win : driver.getWindowHandles()) {
+                if (!win.equals(parent)) {
+                    driver.switchTo().window(win);
+                    break;
+                }
+            }
+
+            System.out.println("New Page Title: " + driver.getTitle());
         }
         else {
             System.out.println("Page not loaded");
