@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -30,14 +31,22 @@ public class SelectorsHUBPractice {
             By mobileNumber = By.name("mobile number");
             By country = By.xpath("//label[text()='Country']/input");
             //  By submit = By.xpath("//button[@value = 'Submit']");
-
+            By firstCrush = By.cssSelector("#inp_val");
+            //By downloadLink = By.linkText("Download Link");
+            By downloadLink = By.xpath("//*[@id='content']/div[2]/div/div[2]/div/div[1]/div[2]/div/div/span/a");
 
             elementUtil.doSendKeys(userEmail, "abc@gmail.com");
             elementUtil.doSendKeys(password, "#1243@Test");
             elementUtil.doSendKeys(company, "CTS");
             elementUtil.doSendKeys(mobileNumber, "342423423");
             elementUtil.doSendKeys(country, "India");
-
+            elementUtil.doSendKeys(firstCrush,"Hoor");
+            //elementUtil.doClick(downloadLink);
+            String text = driver.findElement(downloadLink).getText();
+            System.out.println(text);
+            Actions act = new Actions(driver);
+            act.scrollToElement(driver.findElement(downloadLink)).click().build().perform();
+            System.out.println(browserUtil.getPageTitle());
 //        WebElement submitButton = driver.findElement(submit);
 //        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
 //        wait.until(ExpectedConditions.elementToBeClickable(submit))
