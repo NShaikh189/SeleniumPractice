@@ -93,7 +93,7 @@ public class SelectorsHUBPractice {
                 WebElement namecell = row.findElement(By.xpath("./td[2]"));
 
                 wait.until(ExpectedConditions.visibilityOf(namecell));
-                act.scrollToElement(driver.findElement(By.xpath("//h6[text()='User Table']"))).build().perform();
+                act.scrollToElement(driver.findElement(By.cssSelector("#resultTable"))).build().perform();
                 String name = namecell.getText();
                 System.out.println(name);
                 act.scrollToElement(namecell).build().perform();
@@ -103,19 +103,15 @@ public class SelectorsHUBPractice {
                     WebElement checkbox = row.findElement(By.xpath("./td[1]/input[@type='checkbox']"));
                     wait.until(ExpectedConditions.elementToBeClickable(checkbox));
                     try {
-                        checkbox.click();
+
+                        if (!checkbox.isSelected())
+                            checkbox.click();
                         System.out.println("Clicked");
                     } catch (ElementClickInterceptedException e) {
-                        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);
-                        System.out.println("Clicked in Catch");
+                    //    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);
+                        System.out.println(e.getMessage());
                     }
 
-//                    if (!checkbox.isSelected()) {
-//
-//                        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", checkbox);
-////                        checkbox.click();
-////                        //act.scrollToElement(checkbox).click().build().perform();
-//                    }
                 }
 
                 Thread.sleep(2000);
