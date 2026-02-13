@@ -1,9 +1,6 @@
 package org.example;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -85,18 +82,43 @@ public class SelectorsHUBPractice {
         }
 
     }
-    public static void getUsersData ()
-        {
+    public static void getUsersData () throws InterruptedException {
             Actions act = new Actions(driver);
             By userData = By.xpath("(//table[@class='table hover']/tbody/tr)");
-
-            List<WebElement> userTable = driver.findElements(userData);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+            List<WebElement> userTable = wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(userData)));
 
             for (int i = 0; i < userTable.size(); i++) {
-                WebElement row = userTable.get(i).findElement(By.xpath("./td[2]"));
+                WebElement row = userTable.get(i);
+                WebElement namecell = row.findElement(By.xpath("./td[2]"));
+
+                wait.until(ExpectedConditions.visibilityOf(namecell));
                 act.scrollToElement(driver.findElement(By.xpath("//h6[text()='User Table']"))).build().perform();
-                String name = row.getText();
+                String name = namecell.getText();
                 System.out.println(name);
+                act.scrollToElement(namecell).build().perform();
+                if(name.trim().equalsIgnoreCase("Joe.Root"))
+                {
+
+                    WebElement checkbox = row.findElement(By.xpath("./td[1]/input[@type='checkbox']"));
+                    wait.until(ExpectedConditions.elementToBeClickable(checkbox));
+                    try {
+                        checkbox.click();
+                        System.out.println("Clicked");
+                    } catch (ElementClickInterceptedException e) {
+                        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);
+                        System.out.println("Clicked in Catch");
+                    }
+
+//                    if (!checkbox.isSelected()) {
+//
+//                        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", checkbox);
+////                        checkbox.click();
+////                        //act.scrollToElement(checkbox).click().build().perform();
+//                    }
+                }
+
+                Thread.sleep(2000);
             }
         }
 
