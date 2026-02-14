@@ -10,6 +10,7 @@ import org.utils.BrowserUtil;
 import org.utils.ElementUtil;
 
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.List;
 
 public class SelectorsHUBPractice {
@@ -52,7 +53,7 @@ public class SelectorsHUBPractice {
         wait.until(ExpectedConditions.elementToBeClickable(submit))
         .click();
 
-/*
+
             By downloadLink = By.partialLinkText("DownLoad");
 
             WebElement link = driver.findElement(downloadLink);
@@ -77,15 +78,15 @@ public class SelectorsHUBPractice {
             Thread.sleep(3000);
 */
 
-
-            getUsersData();
+            List<String> users = Arrays.asList("Joe.Root","Garry.White","Kevin.Mathews");
+            getUsersData(users);
 
             driver.quit();
         }
 
 
     }
-    public static void getUsersData () {
+    public static void getUsersData (List<String> users) {
             Actions act = new Actions(driver);
             By userData = By.xpath("(//table[@class='table hover']/tbody/tr)");
             wait = new WebDriverWait(driver, Duration.ofSeconds(3));
@@ -100,12 +101,13 @@ public class SelectorsHUBPractice {
                 String name = namecell.getText();
                 System.out.println(name);
                 act.scrollToElement(namecell).build().perform();
-                if(name.trim().equalsIgnoreCase("Joe.Root"))
+               // if(name.trim().equalsIgnoreCase("Joe.Root"))
+                if(users.contains(name))
                 {
 
                     WebElement checkbox = row.findElement(By.xpath("./td[1]/input[@type='checkbox']"));
                     wait.until(ExpectedConditions.elementToBeClickable(checkbox));
-                    try {
+                     try {
 
                         if (!checkbox.isSelected())
                             checkbox.click();
