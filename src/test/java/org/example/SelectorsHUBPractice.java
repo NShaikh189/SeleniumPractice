@@ -111,6 +111,8 @@ public class SelectorsHUBPractice {
 
                         if (!checkbox.isSelected())
                             checkbox.click();
+
+                        wait.until(driver -> checkbox.isSelected());
                         System.out.println("Clicked");
                     } catch (ElementClickInterceptedException e) {
                     //    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);
