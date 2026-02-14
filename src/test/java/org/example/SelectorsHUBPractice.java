@@ -10,9 +10,41 @@ import org.utils.BrowserUtil;
 import org.utils.ElementUtil;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+class UserData
+{
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    private String userName;
+    private String userRole;
+    private String employeeName;
+    private String status;
+
+    public UserData(String userName, String userRole, String employeeName, String status)
+    {
+        this.userName = userName;
+        this.userRole = userRole;
+        this.employeeName = employeeName;
+        this.status = status;
+    }
+}
 public class SelectorsHUBPractice {
     static WebDriver driver;
     static WebDriverWait wait;
@@ -91,7 +123,10 @@ public class SelectorsHUBPractice {
             By userData = By.xpath("(//table[@class='table hover']/tbody/tr)");
             wait = new WebDriverWait(driver, Duration.ofSeconds(3));
             List<WebElement> userTable = wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(userData)));
-
+            List<UserData> userDataList = new ArrayList<>();
+            String roleName;
+            String empName;
+            String status;
             for (int i = 0; i < userTable.size(); i++) {
                 WebElement row = userTable.get(i);
                 WebElement namecell = row.findElement(By.xpath("./td[2]"));
@@ -99,20 +134,28 @@ public class SelectorsHUBPractice {
                 wait.until(ExpectedConditions.visibilityOf(namecell));
                 act.scrollToElement(driver.findElement(By.cssSelector("#resultTable"))).build().perform();
                 String name = namecell.getText();
+
                 System.out.println(name);
                 act.scrollToElement(namecell).build().perform();
                // if(name.trim().equalsIgnoreCase("Joe.Root"))
+
                 if(users.contains(name))
                 {
 
                     WebElement checkbox = row.findElement(By.xpath("./td[1]/input[@type='checkbox']"));
                     wait.until(ExpectedConditions.elementToBeClickable(checkbox));
-                     try {
+                    roleName = row.findElement(By.xpath("./td[3]")).getText();
+                    empName = row.findElement(By.xpath("./td[4]")).getText();
+                    status = row.findElement(By.xpath("./td[5]")).getText();
+
+                    try {
 
                         if (!checkbox.isSelected())
                             checkbox.click();
 
                         wait.until(driver -> checkbox.isSelected());
+                        userDataList.add( new UserData(name,roleName,empName,status));
+
                         System.out.println("Clicked");
                     } catch (ElementClickInterceptedException e) {
                     //    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);
@@ -122,7 +165,16 @@ public class SelectorsHUBPractice {
                 }
 
             }
+        System.out.println("=======================");
+
+        for(UserData u: userDataList) {
+             System.out.println(u.getUserName());
+            System.out.println(u.getUserRole());
+            System.out.println(u.getEmployeeName());
+            System.out.println(u.getStatus());
+            System.out.println("=======================");
         }
+    }
 
 }
 
