@@ -56,7 +56,7 @@ public class SelectorsHUBPractice {
         ElementUtil elementUtil = new ElementUtil(driver);
 
         browserUtil.launchUrl("https://selectorshub.com/xpath-practice-page/");
-
+        Actions actions = new Actions(driver);
         if (elementUtil.isPageLoaded(3)) {
             By userEmail = By.name("email");
             By password = By.id("pass");
@@ -67,8 +67,9 @@ public class SelectorsHUBPractice {
             By firstCrush = By.cssSelector("#inp_val");
             //By downloadLink = By.linkText("Download Link");
             //  By downloadLink = By.xpath("//*[@id='content']/div[2]/div/div[2]/div/div[1]/div[2]/div/div/span/a");
+            actions.sendKeys(elementUtil.getElement(userEmail),"nayum@gmail.com").build().perform();
 
-            elementUtil.doSendKeys(userEmail, "abc@gmail.com");
+           // elementUtil.doSendKeys(userEmail, "abc@gmail.com");
             elementUtil.doSendKeys(password, "#1243@Test");
             elementUtil.doSendKeys(company, "CTS");
             elementUtil.doSendKeys(mobileNumber, "342423423");
