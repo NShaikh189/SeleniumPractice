@@ -22,5 +22,6 @@ public class rightClick {
 
         Actions act = new Actions(driver);
         act.contextClick(driver.findElement(By.cssSelector(".context-menu-one.btn.btn-neutral"))).build().perform();
+
     }
 }
