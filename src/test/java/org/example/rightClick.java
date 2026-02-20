@@ -21,7 +21,7 @@ public class rightClick {
         wait.until(ExpectedConditions.jsReturnsValue("return document.readyState==='complete'"));
 
         Actions act = new Actions(driver);
-        act.contextClick(driver.findElement(By.cssSelector(".context-menu-one.btn.btn-neutral"))).build().perform();
-
+       // act.contextClick(driver.findElement(By.cssSelector(".context-menu-one.btn.btn-neutral"))).build().perform();
+        act.contextClick().build().perform();
     }
 }
